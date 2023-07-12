@@ -34,8 +34,8 @@ class Match(Base):
     first_team_score: Mapped[int]
     second_team_score: Mapped[int]
 
-    first_team: Mapped["Team"] = relationship(back_populates="match")
-    second_team: Mapped["Team"] = relationship(back_populates="match")
+    first_team: Mapped["Team"] = relationship(back_populates="in_first_team", foreign_keys=[first_team_id])
+    second_team: Mapped["Team"] = relationship(back_populates="in_second_team", foreign_keys=[second_team_id])
 
     def __repr__(self) -> str:
         return f"Match(id={self.id!r}, first_team={self.first_team!r}), second_team={self.second_team!r}, " \

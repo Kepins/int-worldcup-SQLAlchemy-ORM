@@ -18,8 +18,12 @@ class Team(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(100))
 
-    in_first_team: Mapped[List["Match"]] = relationship(back_populates="first_team", cascade="all, delete-orphan")
-    in_second_team: Mapped[List["Match"]] = relationship(back_populates="second_team", cascade="all, delete-orphan")
+    in_first_team: Mapped[List["Match"]] = relationship(back_populates="first_team",
+                                                        cascade="all, delete-orphan",
+                                                        primaryjoin=lambda: Team.id == Match.first_team_id)
+    in_second_team: Mapped[List["Match"]] = relationship(back_populates="second_team",
+                                                         cascade="all, delete-orphan",
+                                                         primaryjoin=lambda: Team.id == Match.second_team_id)
 
     def __repr__(self) -> str:
         return f"Team(id={self.id!r}, name={self.name!r})"

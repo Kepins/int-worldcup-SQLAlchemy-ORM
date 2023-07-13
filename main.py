@@ -19,6 +19,6 @@ if __name__ == '__main__':
     Base.metadata.create_all(engine)
     with Session(engine) as session:
         if db_empty(session):
-            insert_WC2022GroupC(engine)
+            insert_WC2022GroupC(session)
 
-
+        print(two_best_teams(session))

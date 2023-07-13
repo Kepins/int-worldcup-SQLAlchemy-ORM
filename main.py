@@ -21,4 +21,6 @@ if __name__ == '__main__':
         if db_empty(session):
             insert_WC2022GroupC(session)
 
-        print(two_best_teams(session))
+        print(f"Two best teams: {two_best_teams(session)}")
+        print(f"Max points: {max_points(session)}")
+        print(f"Worst team name: {worst_team_name(session)}")

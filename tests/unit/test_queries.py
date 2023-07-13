@@ -18,3 +18,9 @@ def test_two_best_teams(session_exemplary):
     assert teams[1].name == "South Korea"
 
 
+def test_max_points(session_exemplary):
+    assert max_points(session_exemplary) == 6
+
+
+def test_worst_team_name(session_exemplary):
+    assert worst_team_name(session_exemplary) == "Ghana"

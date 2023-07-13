@@ -6,7 +6,7 @@ from models import Base
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 
-from queries import *
+from queries import db_empty, insert_WC2022GroupC, two_best_teams, max_points, worst_team_name
 
 if __name__ == '__main__':
     load_dotenv()

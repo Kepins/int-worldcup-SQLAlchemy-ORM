@@ -16,7 +16,7 @@ class Team(Base):
     __tablename__ = "team"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(100))
+    name: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
 
     in_first_team: Mapped[List["Match"]] = relationship(back_populates="first_team",
                                                         cascade="all, delete-orphan",
@@ -33,10 +33,10 @@ class Match(Base):
     __tablename__ = "match"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    first_team_id: Mapped[int] = mapped_column(ForeignKey("team.id"))
-    second_team_id: Mapped[int] = mapped_column(ForeignKey("team.id"))
-    first_team_score: Mapped[int]
-    second_team_score: Mapped[int]
+    first_team_id: Mapped[int] = mapped_column(ForeignKey("team.id"), nullable=False)
+    second_team_id: Mapped[int] = mapped_column(ForeignKey("team.id"), nullable=False)
+    first_team_score: Mapped[int] = mapped_column(nullable=False)
+    second_team_score: Mapped[int] = mapped_column(nullable=False)
 
     first_team: Mapped["Team"] = relationship(back_populates="in_first_team", foreign_keys=[first_team_id])
     second_team: Mapped["Team"] = relationship(back_populates="in_second_team", foreign_keys=[second_team_id])

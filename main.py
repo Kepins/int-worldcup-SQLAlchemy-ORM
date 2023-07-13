@@ -1,7 +1,12 @@
 import os
-from models import Base, Team, Match
+
+from sqlalchemy.orm import Session
+
+from models import Base
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
+
+from queries import *
 
 if __name__ == '__main__':
     load_dotenv()
@@ -12,4 +17,10 @@ if __name__ == '__main__':
     engine = create_engine(f'postgresql+psycopg2://{user}:{passwd}@{hostname}/{db_name}')
 
     Base.metadata.create_all(engine)
+    with Session(engine) as session:
+        if db_empty(session):
+            insert_WC2022GroupC(session)
 
+        print(f"Two best teams: {two_best_teams(session)}")
+        print(f"Max points: {max_points(session)}")
+        print(f"Worst team name: {worst_team_name(session)}")

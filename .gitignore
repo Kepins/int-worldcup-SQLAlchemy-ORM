@@ -4,5 +4,5 @@
 .idea/
 # virtual environment
 venv/
-# any __pycache__
-*__pycache__/*
+# any __pycache__ file
+*.pyc
